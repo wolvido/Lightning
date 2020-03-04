@@ -79,6 +79,7 @@ camera.position.z = 10;
 camera.position.x = 5;
 camera.position.y = -5;
 
+//essential shits
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
@@ -86,9 +87,7 @@ controls = new THREE.OrbitControls( camera,renderer.domElement);
 
 //
 
-// 
-
-
+//
 let LightInterval = 0;
 
 function Lightning(){
@@ -107,6 +106,13 @@ else{
   pointLight.color.setHex( 0xFFFFFF );
 }
 };
+
+function setupKeyLogger() {
+  document.onkeydown = function(e) {
+    console.log(e);
+  }
+}
+
 
 
 //
@@ -128,12 +134,29 @@ function animate() {
 
 
 //
+document.addEventListener("keydown", onDocumentKeyDown, false);
+function onDocumentKeyDown(event) {
+    var keyCode = event.which;
+    if (keyCode == 87) {
+        model.position.y += 0.001;
+    } else if (keyCode == 83) {
+        model.position.y -= 0.001;
+    } else if (keyCode == 65) {
+        model.position.x -= 0.001;
+    } else if (keyCode == 68) {
+        model.position.x += 0.001;
+    } else if (keyCode == 32) {
+        model.position.set(0, 0, 0);
+    }
+};
 
-Lightning();
 
 //
-  
 
+Lightning();
+setupKeyLogger()
+//
+  
 //
 
    renderer.render( scene, camera );
